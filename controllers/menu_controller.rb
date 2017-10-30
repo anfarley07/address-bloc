@@ -88,10 +88,10 @@ class MenuController
     print "Type entry number to search:"
     selection = gets.chomp.to_i
 
-   if address_book.entries.include? selection
+   if selection < address_book.entries.count
       puts address_book.entries[selection]
       puts "Press enter to return to the main menu"
-      system "clear"
+
     else
       puts "#{selection} is not a valid entry number. Please enter a valid entry number."
       puts "Enter 1 to select a new number. Enter 2 to return to main menu:"
