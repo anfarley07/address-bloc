@@ -86,23 +86,19 @@ class MenuController
   def view_entry_number
     system "clear"
     print "Type entry number to search:"
-    selection = gets.chomp.to_i
+    selection = gets.chomp.to_i - 1
 
    if selection < address_book.entries.count
       puts address_book.entries[selection]
       puts "Press enter to return to the main menu"
 
     else
-      puts "#{selection} is not a valid entry number. Please enter a valid entry number."
+      puts "#{selection + 1} is not a valid entry number. Please enter a valid entry number."
       puts "Enter 1 to select a new number. Enter 2 to return to main menu:"
       entry = gets.chomp.to_i
-        if entry = 1
-          system "clear"
-          view_entry_number
-        elsif entry = 2
+          view_entry_number unless entry == 2
           system "clear"
           main_menu
-        end
     end
   end
 
