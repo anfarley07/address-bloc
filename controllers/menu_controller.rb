@@ -99,6 +99,14 @@ class MenuController
     puts entry
   end
 
+  def nuclear_option
+    print "Are you sure? This deletes all contacts in your Address book. Y/N: "
+    entry = gets.chomp
+    address_book.entries.clear unless entry == "Y" || "y"
+    system "clear"
+    main_menu
+  end
+
   def search_entries
     print "Search by name: "
     name = gets.chomp
@@ -116,6 +124,7 @@ class MenuController
   def search_submenu(entry)
     puts "\nd - delete entry"
     puts "e - edit this entry"
+    puts "omg - nuclear option - deletes all entries"
     puts "m - return to main menu"
 
     selection = gets.chomp
@@ -127,6 +136,10 @@ class MenuController
         main_menu
       when "e"
         edit_entry(entry)
+        system "clear"
+        main_menu
+      when "omg"
+        nuclear_option(entry)
         system "clear"
         main_menu
       when "m"
@@ -184,6 +197,7 @@ class MenuController
     puts "n - next entry"
     puts "d - delete entry"
     puts "e - edit this entry"
+    puts "omg - nuclear option - delete all entries"
     puts "m - return to main menu"
 
     selection = gets.chomp
@@ -195,6 +209,10 @@ class MenuController
       when "e"
         edit_entry(entry)
         entry_submenu(entry)
+      when "omg"
+        nuclear_option(entry)
+        system "clear"
+        main_menu
       when "m"
         system "clear"
         main_menu
