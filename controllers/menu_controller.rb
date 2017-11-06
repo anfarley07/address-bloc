@@ -102,9 +102,12 @@ class MenuController
   def nuclear_option
     print "Are you sure? This deletes all contacts in your Address book. Y/N: "
     entry = gets.chomp
-    address_book.entries.clear unless entry == "Y" || "y"
-    system "clear"
-    main_menu
+      if entry == "N" || "n"
+        main_menu
+      elsif entry == "Y" || "y"
+        address_book.entries.clear
+        system "clear"
+      end
   end
 
   def search_entries
@@ -139,7 +142,7 @@ class MenuController
         system "clear"
         main_menu
       when "omg"
-        nuclear_option(entry)
+        nuclear_option
         system "clear"
         main_menu
       when "m"
@@ -179,12 +182,12 @@ class MenuController
     print "Type entry number to search:"
     selection = gets.chomp.to_i - 1
 
-   if address_book.entries.include? selection
+   if selection <= address_book.entries.count
       puts address_book.entries[selection]
       puts "Press enter to return to the main menu"
-      system "clear"
+
     else
-      puts "#{selection +1} is not a valid entry number. Please enter a valid entry number."
+      puts "#{selection + 1} is not a valid entry number. Please enter a valid entry number."
       puts "Enter 1 to select a new number. Enter 2 to return to main menu:"
       entry = gets.chomp.to_i
          view_entry_number unless entry == 2
@@ -210,7 +213,7 @@ class MenuController
         edit_entry(entry)
         entry_submenu(entry)
       when "omg"
-        nuclear_option(entry)
+        nuclear_option
         system "clear"
         main_menu
       when "m"
