@@ -101,10 +101,10 @@ class MenuController
 
   def nuclear_option
     print "Are you sure? This deletes all contacts in your Address book. Y/N: "
-    entry = gets.chomp
-      if entry == "N" || "n"
+    entry = gets.chomp.downcase
+      if entry == 'n'
         main_menu
-      elsif entry == "Y" || "y"
+      elsif entry == "y" 
         address_book.entries.clear
         system "clear"
       end
